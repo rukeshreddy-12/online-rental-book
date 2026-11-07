@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Book Rental Management</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4faf5;
+    color: #263d2c;
+}
+
+/* HEADER */
+header {
+    background: white;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 10px #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    color: #287a38;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: #315c37;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #78a94a;
+}
+
+/* HERO */
+.hero {
+    min-height: 430px;
+    background:
+    linear-gradient(rgba(0,40,10,.65),rgba(0,40,10,.65)),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1600") center/cover;
+    display: flex;
+    align-items: center;
+    padding: 60px 8%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.hero button {
+    background: #8bc34a;
+    padding: 13px 25px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* SECTIONS */
+section {
+    padding: 55px 7%;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    color: #287a38;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #68796b;
+}
+
+/* SEARCH */
+.search-box {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-box input,
+.search-box select {
+    padding: 12px;
+    width: min(280px, 90%);
+    margin: 5px;
+    border: 1px solid #b9d9bf;
+    border-radius: 6px;
+}
+
+/* BOOKS */
+.book-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+    gap: 25px;
+}
+
+.book-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px #ddd;
+    transition: .3s;
+    padding-bottom: 18px;
+}
+
+.book-card:hover {
+    transform: translateY(-6px);
+}
+
+.book-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: #e5f3e5;
+}
+
+.book-card h3 {
+    color: #287a38;
+    margin: 15px;
+}
+
+.book-card p {
+    margin: 10px 15px;
+    font-size: 14px;
+}
+
+.book-card button {
+    background: #287a38;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    margin: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.book-card button:hover {
+    background: #1d5e2b;
+}
+
+/* RENTAL */
+.rental {
+    background: #e6f3e5;
+}
+
+.rental table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 25px;
+}
+
+th, td {
+    border: 1px solid #dce8dc;
+    padding: 13px;
+    text-align: center;
+}
+
+th {
+    background: #d7edd8;
+    color: #205c30;
+}
+
+.return-btn {
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* ABOUT */
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.about-container img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.about-container h2 {
+    color: #287a38;
+    margin-bottom: 15px;
+}
+
+.about-container p {
+    line-height: 1.8;
+}
+
+/* CONTACT */
+.contact {
+    background: white;
+}
+
+.contact-form {
+    max-width: 550px;
+    margin: auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 10px 0;
+    border: 1px solid #cbdcc9;
+    border-radius: 6px;
+}
+
+.contact-form textarea {
+    height: 110px;
+}
+
+.contact-form button {
+    background: #287a38;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    background: #205c30;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    line-height: 1.8;
+}
+
+@media(max-width:700px) {
+    header {
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        gap: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">📚 BookRent</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#books">Books</a>
+        <a href="#rentals">My Rentals</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- HOME -->
+<div class="hero" id="home">
+    <div class="hero-content">
+
+        <h1>Online Book Rental Management</h1>
+
+        <p>
+            Discover your favourite books, explore different
+            categories and rent books easily from our online
+            book rental library.
+        </p>
+
+        <button onclick="document.getElementById('books').scrollIntoView()">
+            Explore Books
+        </button>
+
+    </div>
+</div>
+
+<!-- BOOKS -->
+<section id="books">
+
+    <h2 class="title">Our Book Collection</h2>
+
+    <p class="subtitle">
+        Explore and rent your favourite books.
+    </p>
+
+    <div class="search-box">
+
+        <input type="text" id="searchInput"
+        placeholder="Search book name..."
+        oninput="displayBooks()">
+
+        <select id="categoryFilter" onchange="displayBooks()">
+            <option value="All">All Categories</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Science">Science</option>
+            <option value="Technology">Technology</option>
+            <option value="Education">Education</option>
+        </select>
+
+    </div>
+
+    <div class="book-container" id="bookContainer"></div>
+
+</section>
+
+<!-- MY RENTALS -->
+<section class="rental" id="rentals">
+
+    <h2 class="title">My Rented Books</h2>
+
+    <p class="subtitle">
+        View and manage your rented books.
+    </p>
+
+    <div style="overflow-x:auto">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Rental Date</th>
+                    <th>Return Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="rentalTable"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+
+    <div class="about-container">
+
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=900"
+        alt="Library bookshelves">
+
+        <div>
+
+            <h2>About Our Book Rental Library</h2>
+
+            <p>
+                Online Book Rental Management is a platform
+                designed to make reading more accessible.
+            </p>
+
+            <p>
+                Users can explore books, search for their
+                favourite titles, rent books and manage their
+                rental records.
+            </p>
+
+            <p>
+                Our goal is to encourage reading and provide
+                a convenient digital library experience.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+    <h2 class="title">Contact Us</h2>
+
+    <p class="subtitle">
+        Send your questions and suggestions.
+    </p>
+
+    <div class="contact-form">
+
+        <form onsubmit="sendMessage(event)">
+
+            <input type="text" id="userName"
+            placeholder="Your Name" required>
+
+            <input type="email" id="userEmail"
+            placeholder="Your Email" required>
+
+            <textarea id="userMessage"
+            placeholder="Your Message" required></textarea>
+
+            <button type="submit">Send Message</button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <h2>📚 BookRent Online Library</h2>
+
+    <p>Read More | Learn More | Grow More</p>
+
+    <p>© 2026 Online Book Rental Management System</p>
+
+</footer>
+
+<script>
+
+// BOOK DATA
+const books = [
+    {
+        id: 1,
+        name: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        category: "Fiction",
+        price: 30,
+        image: "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg"
+    },
+    {
+        id: 2,
+        name: "A Brief History of Time",
+        author: "Stephen Hawking",
+        category: "Science",
+        price: 40,
+        image: "https://covers.openlibrary.org/b/isbn/9780553380163-L.jpg"
+    },
+    {
+        id: 3,
+        name: "Clean Code",
+        author: "Robert C. Martin",
+        category: "Technology",
+        price: 50,
+        image: "https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg"
+    },
+    {
+        id: 4,
+        name: "Wings of Fire",
+        author: "A.P.J. Abdul Kalam",
+        category: "Education",
+        price: 35,
+        image: "https://covers.openlibrary.org/b/isbn/9788173711466-L.jpg"
+    },
+    {
+        id: 5,
+        name: "The Alchemist",
+        author: "Paulo Coelho",
+        category: "Fiction",
+        price: 30,
+        image: "https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg"
+    },
+    {
+        id: 6,
+        name: "Introduction to Algorithms",
+        author: "Thomas H. Cormen",
+        category: "Technology",
+        price: 60,
+        image: "https://covers.openlibrary.org/b/isbn/9780262046305-L.jpg"
+    },
+    {
+        id: 7,
+        name: "Cosmos",
+        author: "Carl Sagan",
+        category: "Science",
+        price: 45,
+        image: "https://covers.openlibrary.org/b/isbn/9780345539434-L.jpg"
+    },
+    {
+        id: 8,
+        name: "Think and Grow Rich",
+        author: "Napoleon Hill",
+        category: "Education",
+        price: 30,
+        image: "https://covers.openlibrary.org/b/isbn/9781585424337-L.jpg"
+    }
+];
+
+// LOAD RENTALS
+let rentals = JSON.parse(localStorage.getItem("rentals")) || [];
+
+function saveRentals() {
+    localStorage.setItem("rentals", JSON.stringify(rentals));
+}
+
+// DISPLAY BOOKS
+function displayBooks() {
+
+    let search = document.getElementById("searchInput")
+    .value.toLowerCase();
+
+    let category = document.getElementById("categoryFilter").value;
+
+    let container = document.getElementById("bookContainer");
+
+    container.innerHTML = "";
+
+    let filtered = books.filter(book => {
+
+        let matchName = book.name.toLowerCase().includes(search)
+        || book.author.toLowerCase().includes(search);
+
+        let matchCategory =
+        category === "All" || book.category === category;
+
+        return matchName && matchCategory;
+
+    });
+
+    if (filtered.length === 0) {
+        container.textContent = "No books found.";
+        return;
+    }
+
+    filtered.forEach(book => {
+
+        let isRented = rentals.some(r => r.id === book.id);
+
+        let card = document.createElement("div");
+        card.className = "book-card";
+
+        let img = document.createElement("img");
+        img.src = book.image;
+        img.alt = book.name + " book cover";
+        img.onerror = function() {
+            this.src = "https://placehold.co/300x400/e5f3e5/287a38?text=Book";
+        };
+
+        let title = document.createElement("h3");
+        title.textContent = book.name;
+
+        let author = document.createElement("p");
+        author.textContent = "Author: " + book.author;
+
+        let type = document.createElement("p");
+        type.textContent = "Category: " + book.category;
+
+        let price = document.createElement("p");
+        price.textContent = "Rental Price: ₹" + book.price;
+
+        let btn = document.createElement("button");
+        btn.textContent = isRented ? "Already Rented" : "Rent Book";
+        btn.disabled = isRented;
+
+        if (isRented) {
+            btn.style.background = "#999";
+        } else {
+            btn.onclick = () => rentBook(book.id);
+        }
+
+        card.append(img, title, author, type, price, btn);
+        container.appendChild(card);
+
+    });
+
+}
+
+// RENT BOOK
+function rentBook(id) {
+
+    let book = books.find(b => b.id === id);
+
+    if (!book || rentals.some(r => r.id === id)) {
+        return;
+    }
+
+    let today = new Date();
+
+    let returnDate = new Date();
+    returnDate.setDate(today.getDate() + 14);
+
+    rentals.push({
+        id: book.id,
+        name: book.name,
+        rentalDate: today.toLocaleDateString("en-IN"),
+        returnDate: returnDate.toLocaleDateString("en-IN")
+    });
+
+    saveRentals();
+
+    displayBooks();
+    displayRentals();
+
+    alert("Book rented successfully!");
+
+}
+
+// DISPLAY RENTALS
+function displayRentals() {
+
+    let table = document.getElementById("rentalTable");
+
+    table.replaceChildren();
+
+    rentals.forEach(rental => {
+
+        let row = document.createElement("tr");
+
+        function makeCell(value) {
+            let td = document.createElement("td");
+            td.textContent = value;
+            return td;
+        }
+
+        row.append(
+            makeCell(rental.name),
+            makeCell(rental.rentalDate),
+            makeCell(rental.returnDate)
+        );
+
+        let action = document.createElement("td");
+
+        let btn = document.createElement("button");
+        btn.textContent = "Return";
+        btn.className = "return-btn";
+
+        btn.onclick = () => returnBook(rental.id);
+
+        action.appendChild(btn);
+        row.appendChild(action);
+
+        table.appendChild(row);
+
+    });
+
+}
+
+// RETURN BOOK
+function returnBook(id) {
+
+    if (!confirm("Do you want to return this book?")) return;
+
+    rentals = rentals.filter(r => r.id !== id);
+
+    saveRentals();
+
+    displayRentals();
+    displayBooks();
+
+    alert("Book returned successfully!");
+
+}
+
+// CONTACT FORM
+function sendMessage(event) {
+
+    event.preventDefault();
+
+    let name = document.getElementById("userName").value;
+
+    alert("Thank you " + name + "! Your message has been received in this demo.");
+
+    event.target.reset();
+
+}
+
+// INITIAL DISPLAY
+displayBooks();
+displayRentals();
+
+</script>
+
+</body>
+</html>
